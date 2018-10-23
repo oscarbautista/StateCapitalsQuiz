@@ -16,6 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".QuizActivity"
+                  android:theme="@style/AppTheme"
+                  android:parentActivityName="obautista.uga.edu.statecapitalsquiz.QuizActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data android:name ="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"></meta-data>
+        </activity>
+        <activity android:name=".HistoryActivity"
+                  android:theme="@style/AppTheme"
+                  android:parentActivityName="obautista.uga.edu.statecapitalsquiz.HistoryActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data android:name ="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"></meta-data>
+        </activity>
     </application>
 
 </manifest>

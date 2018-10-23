@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">State Capitals Quiz</string>
+    <string name="app_description">Welcome to the ultimate test on if you know your state capitals! To start the quiz,
+    click on the "Quiz" button, and you can also click on the history button to see past quizzes!</string>
+    <string name="quiz_btn">Quiz</string>
+    <string name="history_btn">History</string>
 </resources>
