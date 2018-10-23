@@ -2,6 +2,7 @@ package obautista.uga.edu.statecapitalsquiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class QuizActivity extends AppCompatActivity{
@@ -93,8 +96,11 @@ public class QuizActivity extends AppCompatActivity{
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private int mImageNum;
-        private TextView mTextView;
-        private ImageView mImageView;
+        private TextView quizPromptView;
+        private RadioButton answerOne;
+        private RadioButton answerTwo;
+        private RadioButton answerThree;
+        private RadioGroup group;
 
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -121,8 +127,26 @@ public class QuizActivity extends AppCompatActivity{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
-            mTextView = (TextView) rootView.findViewById(R.id.section_label);
-            mImageView = (ImageView) rootView.findViewById(R.id.image_view);
+            quizPromptView = (TextView) rootView.findViewById(R.id.quizPrompt);
+            answerOne = (RadioButton) rootView.findViewById(R.id.radioButton);
+            answerTwo = (RadioButton) rootView.findViewById(R.id.radioButton2);
+            answerThree = (RadioButton) rootView.findViewById(R.id.radioButton3);
+            group = (RadioGroup) rootView.findViewById(R.id.radioGroup);
+
+            group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    if(i==R.id.radioButton){
+
+                    }
+                    if(i==R.id.radioButton2){
+
+                    }
+                    if(i==R.id.radioButton3){
+
+                    }
+                }
+            });
             return rootView;
         }
 
@@ -132,7 +156,6 @@ public class QuizActivity extends AppCompatActivity{
             if (QuizActivity.class.isInstance(getActivity())) {
                 final int resId = QuizActivity.imageIds[mImageNum - 1];
                 final String description = imageDescriptions[mImageNum - 1];
-                ((QuizActivity) getActivity()).loadView(mImageView, resId, mTextView, description);
             }
         }
     }
