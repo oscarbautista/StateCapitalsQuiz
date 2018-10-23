@@ -55,6 +55,7 @@ public class QuizActivity extends AppCompatActivity{
             @Override
             public void onPageSelected(int position) {
                 mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(position));
+
             }
 
             @Override
@@ -89,7 +90,7 @@ public class QuizActivity extends AppCompatActivity{
         @Override
         public CharSequence getPageTitle(int position) {
             int imageNum = position + 1;
-            return String.valueOf("Image " + imageNum);
+            return String.valueOf("Question " + imageNum);
         }
     }
 
@@ -97,6 +98,7 @@ public class QuizActivity extends AppCompatActivity{
         private static final String ARG_SECTION_NUMBER = "section_number";
         private int mImageNum;
         private TextView quizPromptView;
+        private TextView questionNum;
         private RadioButton answerOne;
         private RadioButton answerTwo;
         private RadioButton answerThree;
@@ -128,11 +130,13 @@ public class QuizActivity extends AppCompatActivity{
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
             quizPromptView = (TextView) rootView.findViewById(R.id.quizPrompt);
+            questionNum = (TextView) rootView.findViewById(R.id.questionNumber);
             answerOne = (RadioButton) rootView.findViewById(R.id.radioButton);
             answerTwo = (RadioButton) rootView.findViewById(R.id.radioButton2);
             answerThree = (RadioButton) rootView.findViewById(R.id.radioButton3);
             group = (RadioGroup) rootView.findViewById(R.id.radioGroup);
 
+            questionNum.setText("Question " + mImageNum);
             group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
