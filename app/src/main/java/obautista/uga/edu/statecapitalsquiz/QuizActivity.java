@@ -129,12 +129,12 @@ public class QuizActivity extends AppCompatActivity{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
-            quizPromptView = (TextView) rootView.findViewById(R.id.quizPrompt);
-            questionNum = (TextView) rootView.findViewById(R.id.questionNumber);
-            answerOne = (RadioButton) rootView.findViewById(R.id.radioButton);
-            answerTwo = (RadioButton) rootView.findViewById(R.id.radioButton2);
-            answerThree = (RadioButton) rootView.findViewById(R.id.radioButton3);
-            group = (RadioGroup) rootView.findViewById(R.id.radioGroup);
+            quizPromptView = rootView.findViewById(R.id.quizPrompt);
+            questionNum = rootView.findViewById(R.id.questionNumber);
+            answerOne = rootView.findViewById(R.id.radioButton);
+            answerTwo = rootView.findViewById(R.id.radioButton2);
+            answerThree = rootView.findViewById(R.id.radioButton3);
+            group = rootView.findViewById(R.id.radioGroup);
 
             questionNum.setText("Question " + mImageNum);
             group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
