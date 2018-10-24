@@ -23,20 +23,26 @@ public class QuizActivity extends AppCompatActivity{
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
     ActionBar mActionBar;
+    private static QuizQuestion[] questions;
+    DatabaseHelper stateCapitalsDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
 
-        // Initialize views and action bar
+        // Initialize views, action bar, and database
         mActionBar = getSupportActionBar();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), 6);
         mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(0));
+        stateCapitalsDb = new DatabaseHelper(this);
 
         // Initialize viewpager and set the adapter
         mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        // Get an array of six random quiz questions
+        questions = stateCapitalsDb.getSixQuestions();
 
         // Add listener to view pager
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -89,7 +95,7 @@ public class QuizActivity extends AppCompatActivity{
      */
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private int mImageNum;
+        private int questionNumber;
         private TextView quizPromptView;
         private TextView questionNum;
         private RadioButton answerOne;
@@ -102,6 +108,7 @@ public class QuizActivity extends AppCompatActivity{
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+
             return fragment;
         }
 
@@ -112,15 +119,17 @@ public class QuizActivity extends AppCompatActivity{
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
-                mImageNum = getArguments().getInt(ARG_SECTION_NUMBER);
+                questionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             } else {
-                mImageNum = -1;
+                questionNumber = -1;
             }
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
+            // Initialize fragment views
             View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
             quizPromptView = rootView.findViewById(R.id.quizPrompt);
             questionNum = rootView.findViewById(R.id.questionNumber);
@@ -129,17 +138,30 @@ public class QuizActivity extends AppCompatActivity{
             answerThree = rootView.findViewById(R.id.radioButton3);
             group = rootView.findViewById(R.id.radioGroup);
 
-            questionNum.setText("Question " + mImageNum);
+            // Get current question and save as a QuizQuestion object
+            QuizQuestion currentQuestion = questions[questionNumber-1];
+
+            // Set question number text
+            questionNum.setText("Question " + questionNumber);
+
+            // Set question prompt text
+            quizPromptView.setText("What is the capital of " + currentQuestion.getState() + "?");
+
+            // Set answers text
+            answerOne.setText(currentQuestion.getCapital());
+            answerTwo.setText(currentQuestion.getSecondCity());
+            answerThree.setText(currentQuestion.getThirdCity());
+
             group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    if(i==R.id.radioButton){
+                    if(i == R.id.radioButton){
+                        
+                    }
+                    if(i == R.id.radioButton2){
 
                     }
-                    if(i==R.id.radioButton2){
-
-                    }
-                    if(i==R.id.radioButton3){
+                    if(i == R.id.radioButton3){
 
                     }
                 }

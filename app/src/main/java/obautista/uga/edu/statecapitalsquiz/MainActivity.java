@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialize views
-        quizzesBtn= findViewById(R.id.quizBtn);
-        historyBtn= findViewById(R.id.historyBtn);
+        quizzesBtn = findViewById(R.id.quizBtn);
+        historyBtn = findViewById(R.id.historyBtn);
 
         // Initialize database and pass in values from csv file into database
         stateCapitalsDb = new DatabaseHelper(this);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Split the line and insert as a new row in the db
                 String[] cells = line.split(",");
-                stateCapitalsDb.insertData(cells[0], cells[1], cells[2], cells[3]);
+                stateCapitalsDb.insertQuestion(cells[0], cells[1], cells[2], cells[3]);
             }
         } catch(IOException e ) {
             Log.wtf("csv read", "Error reading csv file" + line, e);
