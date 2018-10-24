@@ -45,15 +45,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:text="@string/history_btn"
+        android:text="@string/scores_btn"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/quizBtn"
-        app:layout_constraintTop_toBottomOf="@+id/description"/>
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 </android.support.constraint.ConstraintLayout>

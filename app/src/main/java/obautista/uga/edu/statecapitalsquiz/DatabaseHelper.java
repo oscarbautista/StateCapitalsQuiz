@@ -25,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // Create quiz question table
         db.execSQL("create table " + TABLE_NAME + " (STATE TEXT PRIMARY KEY, CAPITAL TEXT, SECOND_CITY TEXT, THIRD_CITY TEXT)"  );
     }
 

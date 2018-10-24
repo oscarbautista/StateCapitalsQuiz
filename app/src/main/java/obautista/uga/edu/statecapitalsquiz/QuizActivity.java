@@ -19,34 +19,26 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class QuizActivity extends AppCompatActivity{
+
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
     ActionBar mActionBar;
-
-    public final static Integer[] imageIds = new Integer[]{
-            R.drawable.figs, R.drawable.grapes, R.drawable.heirloom_tomatoes,
-            R.drawable.lemons, R.drawable.lime, R.drawable.oranges,
-            R.drawable.peach, R.drawable.peppers, R.drawable.zucchini
-    };
-
-    public final static String[] imageDescriptions = new String[]{
-            "Figs", "Grapes", "Heirloom Tomatoes",
-            "Lemons", "Lime", "Oranges",
-            "Peach", "Peppers", "Zucchini"
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
 
+        // Initialize views and action bar
         mActionBar = getSupportActionBar();
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), imageIds.length);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), 6);
         mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(0));
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+
+        // Initialize viewpager and set the adapter
+        mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        // Add listener to view pager
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -64,11 +56,9 @@ public class QuizActivity extends AppCompatActivity{
         });
     }
 
-    public void loadView(ImageView imageView, int resId, TextView textView, String description) {
-        imageView.setImageResource(resId);
-        textView.setText(description);
-    }
-
+    /**
+     * Class for viewpager
+     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private final int mSize;
 
@@ -94,6 +84,9 @@ public class QuizActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Class for viewpager fragments
+     */
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private int mImageNum;
@@ -152,15 +145,6 @@ public class QuizActivity extends AppCompatActivity{
                 }
             });
             return rootView;
-        }
-
-        @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-            if (QuizActivity.class.isInstance(getActivity())) {
-                final int resId = QuizActivity.imageIds[mImageNum - 1];
-                final String description = imageDescriptions[mImageNum - 1];
-            }
         }
     }
 }
