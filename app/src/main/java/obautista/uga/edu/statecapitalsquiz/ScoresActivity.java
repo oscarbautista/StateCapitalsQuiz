@@ -20,6 +20,7 @@ public class ScoresActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
     ScoreCardRecyclerAdapter adapter;
+    DatabaseHelper stateCapitalDB;
 
     List<ScoreCard> scoreCardList;
 
@@ -31,7 +32,11 @@ public class ScoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scores_activity);
 
+        stateCapitalDB = new DatabaseHelper(this);
+
         scoreCardList = new ArrayList<>();
+        scoreCardList = stateCapitalDB.allScores();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
