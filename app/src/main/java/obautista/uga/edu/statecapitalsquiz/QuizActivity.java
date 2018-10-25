@@ -17,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class QuizActivity extends AppCompatActivity{
 
@@ -24,6 +29,7 @@ public class QuizActivity extends AppCompatActivity{
     ViewPager mViewPager;
     ActionBar mActionBar;
     private static QuizQuestion[] questions;
+    private static int[] answers;
     DatabaseHelper stateCapitalsDb;
 
     @Override
@@ -43,6 +49,10 @@ public class QuizActivity extends AppCompatActivity{
 
         // Get an array of six random quiz questions
         questions = stateCapitalsDb.getSixQuestions();
+
+        // Create an array that will hold the answers to each question
+        answers = new int[6];
+        Arrays.fill(answers, 0);
 
         // Add listener to view pager
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -97,11 +107,12 @@ public class QuizActivity extends AppCompatActivity{
         private static final String ARG_SECTION_NUMBER = "section_number";
         private int questionNumber;
         private TextView quizPromptView;
-        private TextView questionNum;
         private RadioButton answerOne;
         private RadioButton answerTwo;
         private RadioButton answerThree;
         private RadioGroup group;
+        private RadioButton selectedAnswer;
+        private Button submitBtn;
 
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -130,42 +141,63 @@ public class QuizActivity extends AppCompatActivity{
                                  Bundle savedInstanceState) {
 
             // Initialize fragment views
-            View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_quiz_activity, container, false);
             quizPromptView = rootView.findViewById(R.id.quizPrompt);
-            questionNum = rootView.findViewById(R.id.questionNumber);
             answerOne = rootView.findViewById(R.id.radioButton);
             answerTwo = rootView.findViewById(R.id.radioButton2);
             answerThree = rootView.findViewById(R.id.radioButton3);
             group = rootView.findViewById(R.id.radioGroup);
+            submitBtn = rootView.findViewById(R.id.submitBtn);
 
             // Get current question and save as a QuizQuestion object
-            QuizQuestion currentQuestion = questions[questionNumber-1];
-
-            // Set question number text
-            questionNum.setText("Question " + questionNumber);
+            final QuizQuestion currentQuestion = questions[questionNumber-1];
 
             // Set question prompt text
             quizPromptView.setText("What is the capital of " + currentQuestion.getState() + "?");
 
-            // Set answers text
-            answerOne.setText(currentQuestion.getCapital());
-            answerTwo.setText(currentQuestion.getSecondCity());
-            answerThree.setText(currentQuestion.getThirdCity());
+            // Add possible answer choices to ArrayList and shuffle them
+            final ArrayList<String> choices = new ArrayList<>();
 
+            choices.add(currentQuestion.getCapital());
+            choices.add(currentQuestion.getSecondCity());
+            choices.add(currentQuestion.getThirdCity());
+
+            Collections.shuffle(choices);
+
+            // Set answers text
+            answerOne.setText(choices.get(0));
+            answerTwo.setText(choices.get(1));
+            answerThree.setText(choices.get(2));
+
+            // Adds a listener the choices radio group and keeps score
             group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    if(i == R.id.radioButton){
-                        
+                    selectedAnswer = rootView.findViewById(i);
+                    if(selectedAnswer.getText().equals(currentQuestion.getCapital())) {
+                        answers[questionNumber-1] = 1;
                     }
-                    if(i == R.id.radioButton2){
-
-                    }
-                    if(i == R.id.radioButton3){
-
+                    else {
+                        answers[questionNumber-1] = 0;
                     }
                 }
             });
+
+            // Checks to see if user is at the end of the quiz and shows submit button
+            if(questionNumber == 6) {
+                submitBtn.setVisibility(View.VISIBLE);
+
+                // Submit the quiz
+                submitBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Toast.makeText(getContext(), "Submitted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+
             return rootView;
         }
     }

@@ -14,12 +14,18 @@ import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "StateCapitals.db";
-    public static final String TABLE_QUESTIONS = "questions_table";
-    public static final String STATE = "STATE";
-    public static final String CAPITAL = "CAPITAL";
-    public static final String SECOND_CITY = "SECOND_CITY";
-    public static final String THIRD_CITY = "THIRD_CITY";
+    private static final String DATABASE_NAME = "StateCapitals.db";
+    private static final String TABLE_QUESTIONS = "questions_table";
+    private static final String STATE = "state";
+    private static final String CAPITAL = "capital";
+    private static final String SECOND_CITY = "second_city";
+    private static final String THIRD_CITY = "third_city";
+    private static final String TABLE_SCORES = "scores_table";
+    private static final String QUIZ_ID = "quiz_id";
+    private static final String DATE = "date";
+    private static final String CORRECT_NUM = "correct_num";
+    private static final String INCORRECT_NUM = "incorrect_num";
+    private static final String SCORE = "score";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -30,16 +36,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create quiz question table
         db.execSQL("create table " + TABLE_QUESTIONS + " (STATE TEXT PRIMARY KEY, CAPITAL TEXT, SECOND_CITY TEXT, THIRD_CITY TEXT)"  );
+        db.execSQL("create table " + TABLE_SCORES + " (TEST_ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, CORRECT_NUM INTEGER, INCORRECT_NUM INTEGER, SCORE DOUBLE)"  );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCORES);
         onCreate(db);
     }
 
     /**
-     * insertQuestion : Method to insert a new row into the database
+     * insertQuestion : Method to insert a new question into the database
      * @param state The state
      * @param capital The capitol of the state
      * @param secondCity The second largest city in the state
@@ -49,16 +57,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertQuestion (String state, String capital, String secondCity, String thirdCity) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(STATE, state);
-        contentValues.put(CAPITAL, capital);
-        contentValues.put(SECOND_CITY, secondCity);
-        contentValues.put(THIRD_CITY, thirdCity);
+        ContentValues cv = new ContentValues();
+        cv.put(STATE, state);
+        cv.put(CAPITAL, capital);
+        cv.put(SECOND_CITY, secondCity);
+        cv.put(THIRD_CITY, thirdCity);
 
-        long result = db.insert(TABLE_QUESTIONS, null, contentValues);
+        long result = db.insert(TABLE_QUESTIONS, null, cv);
 
         if(result == -1) return false;
         else return true;
+    }
+
+    /**
+     * insertScore : Method to insert a new quiz result into the database
+     * @param date The date the quiz was completed
+     * @param correctNum The number of correct answers
+     * @param incorrectNum The number of incorrect answers
+     * @param score The score percentage out of 100
+     * @return a boolean stating if the insertion was successful
+     */
+    public boolean insertScore (String date, int correctNum, int incorrectNum, double score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(DATE, date);
+        cv.put(CORRECT_NUM, correctNum);
+        cv.put(INCORRECT_NUM, incorrectNum);
+        cv.put(SCORE, score);
+
+        long result = db.insert(TABLE_SCORES, null, cv);
+
+        if(result == -1) return false;
+        else return true;
+
     }
 
     /**
