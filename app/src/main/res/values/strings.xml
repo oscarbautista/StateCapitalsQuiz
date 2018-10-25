@@ -4,4 +4,6 @@
     click on the "Quiz" button, and you can also click on the history button to see past quizzes!</string>
     <string name="quiz_btn">Quiz</string>
     <string name="scores_btn">Scores</string>
+    <string name="results_title">Quiz Results</string>
+    <string name="home_btn">Go Home</string>
 </resources>

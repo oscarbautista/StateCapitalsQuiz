@@ -192,7 +192,15 @@ public class QuizActivity extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
 
-                        Toast.makeText(getContext(), "Submitted", Toast.LENGTH_SHORT).show();
+                        int totalCorrect = 0;
+
+                        for(int i = 0; i < answers.length; i++) {
+                            totalCorrect += answers[i];
+                        }
+
+                        Intent intent = new Intent(view.getContext(), Results.class);
+                        intent.putExtra("totalCorrect", totalCorrect);
+                        startActivity(intent);
                     }
                 });
 
