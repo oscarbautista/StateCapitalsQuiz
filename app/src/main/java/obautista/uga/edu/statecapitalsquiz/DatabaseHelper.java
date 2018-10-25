@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by Oscar on 10/22/18.
  */
@@ -122,6 +124,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return sixQuestions;
+    }
+
+    public ArrayList<ScoreCard> allScores () {
+
+        // Pull all scores from the database
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_SCORES, null);
+
+        ArrayList<ScoreCard> scores = new ArrayList<>();
+
+        // If no data is in the db
+        if(res.getCount() == 0) {
+            Log.w("Error", "No data found in database");
+            return scores;
+        }
+
+        // Store all the scores in the array list
+        while(res.moveToNext()) {
+            ScoreCard score = new ScoreCard
+                    (res.getString(0), res.getDouble(1), res.getInt(2), res.getInt(3));
+
+            scores.add(score);
+        }
+
+        return scores;
+
     }
 
 }
