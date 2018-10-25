@@ -3,35 +3,16 @@ package obautista.uga.edu.statecapitalsquiz;
 
 public class ScoreCard {
 
-    private int   id;
     private String date;
-    private int score;
+    private double score;
     private int questionsCorrect;
     private int questionsWrong;
 
-    public ScoreCard()
-    {
-        this.id = -1;
-        this.date = null;
-        this.score = -1;
-        this.questionsCorrect = -1;
-        this.questionsWrong = -1;
-    }
-
-    public ScoreCard (String date, int score, int questionsCorrect, int questionsWrong ) {
-        this.id = -1;
+    public ScoreCard (String date, double score, int questionsCorrect, int questionsWrong ) {
         this.date = date;
         this.score = score;
         this.questionsCorrect = questionsCorrect;
         this.questionsWrong = questionsWrong;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDate() {
@@ -42,11 +23,11 @@ public class ScoreCard {
         this.date = date;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
@@ -64,9 +45,5 @@ public class ScoreCard {
 
     public void setQuestionsWrong(int questionsWrong) {
         this.questionsWrong = questionsWrong;
-    }
-
-    public String toString() {
-        return id + ": " + date + " " + score + " " + questionsCorrect + " " + questionsWrong;
     }
 }
