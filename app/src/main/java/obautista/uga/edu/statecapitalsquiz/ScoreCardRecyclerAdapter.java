@@ -18,7 +18,7 @@ public class ScoreCardRecyclerAdapter extends RecyclerView.Adapter<ScoreCardRecy
 
     public static final String DEBUG_TAG = "ScoreCardRecyclerAdapter";
 
-    private Context mCtx;
+    private Context mCtx;                       //context objects inflates layout
     private List<ScoreCard> scoreCardList;
 
     public ScoreCardRecyclerAdapter(Context ctx, List<ScoreCard> scoreCardList) {
@@ -28,8 +28,9 @@ public class ScoreCardRecyclerAdapter extends RecyclerView.Adapter<ScoreCardRecy
 
     @NonNull
     @Override
-    //returns an instance of this class
-    //returns viewholder (UI elements)
+    //creates a view holder instance
+    //returns an instance of ScoreCardHolder
+    //ViewHolder is the UI elements
     public ScoreCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater =  LayoutInflater.from(mCtx);

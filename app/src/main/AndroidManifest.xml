@@ -27,8 +27,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".ScoresActivity"
-            android:parentActivityName=".ScoresActivity"
+            android:name=".ScoreListActivity"
+            android:parentActivityName=".ScoreListActivity"
             android:theme="@style/AppTheme">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
