@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Store all the scores in the array list
         while(res.moveToNext()) {
             ScoreCard score = new ScoreCard
-                    (res.getString(0), res.getDouble(1), res.getInt(2), res.getInt(3));
+                    (res.getString(1), res.getDouble(4), res.getInt(2), res.getInt(3));
 
             scores.add(score);
         }

@@ -8,23 +8,27 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreListActivity extends AppCompatActivity {
 
-    DatabaseHelper stateCapitalDB;
+    DatabaseHelper stateCapitalsDB;
     List<ScoreCard> scoreCardList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_list_activity);
 
-        ListView listView=(ListView) findViewById(R.id.listView);
-        stateCapitalDB = new DatabaseHelper(this);
+        stateCapitalsDB = new DatabaseHelper(this);
 
         scoreCardList = new ArrayList<>();
-        scoreCardList = stateCapitalDB.allScores();
+        scoreCardList = stateCapitalsDB.allScores();
+
+        ListView listView = findViewById(R.id.listView);
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
 
     }
 
@@ -52,18 +56,20 @@ public class ScoreListActivity extends AppCompatActivity {
 
             view = getLayoutInflater().inflate(R.layout.score_layout,null);
 
-            TextView textView_date = (TextView)view.findViewById(R.id.date);
-            TextView textView_scores = (TextView)view.findViewById(R.id.scores);
-            TextView textView_questionsCorrect = (TextView)view.findViewById(R.id.questionsCorrect);
-            TextView textView_questionsWrong = (TextView)view.findViewById(R.id.questionsWrong);
+            TextView textView_date = view.findViewById(R.id.date);
+            TextView textView_scores = view.findViewById(R.id.scores);
+            TextView textView_questionsCorrect = view.findViewById(R.id.questionsCorrect);
+            TextView textView_questionsWrong = view.findViewById(R.id.questionsWrong);
+
+            DecimalFormat df = new DecimalFormat("0.##");
 
 
             textView_date.setText(scoreCardList.get(i).getDate());
-            textView_scores.setText(Double.toString(scoreCardList.get(i).getScore()));
+            textView_scores.setText(df.format(scoreCardList.get(i).getScore()));
             textView_questionsCorrect.setText(Integer.toString(scoreCardList.get(i).getQuestionsCorrect()));
             textView_questionsWrong.setText(Integer.toString(scoreCardList.get(i).getQuestionsWrong()));
 
-            return null;
+            return view;
         }
     }
 
