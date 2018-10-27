@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Created by Daniel on 10/22/18.
+ */
 public class QuizActivity extends AppCompatActivity{
 
     SectionsPagerAdapter mSectionsPagerAdapter;
@@ -32,6 +35,11 @@ public class QuizActivity extends AppCompatActivity{
     private static int[] answers;
     DatabaseHelper stateCapitalsDb;
 
+    /*
+      This onCreate method is called everytime the app boots up. It contains most of the methods used in the program
+      @param savedInstanceState is used to save the state
+      @return there is nothing to return so it is void
+      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,16 +64,31 @@ public class QuizActivity extends AppCompatActivity{
 
         // Add listener to view pager
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            /*
+          This method would be used if we wanted to do something in particular when the page is scrolled
+          @param position is the position of the page
+          @param positionOffset is the offset one would set
+          @param positionOffsetPixels is the offset pixels we would want to set
+          @return there is nothing to return so it is void
+          */
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
-
+            /*
+          This method sets the title of the page view when one slides to it
+          @param position is the position of the page
+          @return there is nothing to return so it is void
+          */
             @Override
             public void onPageSelected(int position) {
                 mActionBar.setTitle(mSectionsPagerAdapter.getPageTitle(position));
 
             }
-
+            /*
+          This method would be used if we wanted to start a state change on page scroll
+          @param state is the state number
+          @return there is nothing to return so it is void
+          */
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -77,22 +100,39 @@ public class QuizActivity extends AppCompatActivity{
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private final int mSize;
-
+        /*
+      This method is a constructor for the pager adapter
+      @param fm is the fragment manager for the fragment
+      @param size is the size that we want the page to have
+      */
         public SectionsPagerAdapter(FragmentManager fm, int size) {
             super(fm);
             this.mSize = size;
         }
 
+        /*
+      This method gets the item fragment at a position
+      @param position is the certain position in the pager that we want
+      @return Fragment is just a fragment we want to return to show in the view pager
+      */
         @Override
         public Fragment getItem(int position) {
             return PlaceholderFragment.newInstance(position + 1);
         }
-
+        /*
+      This method returns the size of the view pager
+      @return we return an int because that is what the size would be outputted as
+      */
         @Override
         public int getCount() {
             return mSize;
         }
 
+        /*
+      This method gets the page title of the view pager position
+      @param position is the position of the page in the sequence
+      @return CharSequence is just the string we want to return at the top for the title
+      */
         @Override
         public CharSequence getPageTitle(int position) {
             int imageNum = position + 1;
@@ -114,6 +154,7 @@ public class QuizActivity extends AppCompatActivity{
         private RadioButton selectedAnswer;
         private Button submitBtn;
 
+
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -126,6 +167,11 @@ public class QuizActivity extends AppCompatActivity{
         public PlaceholderFragment() {
         }
 
+        /*
+          This onCreate method is called everytime the app boots up. It contains most of the methods used in the program
+          @param savedInstanceState is used to save the state
+          @return there is nothing to return so it is void
+      */
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

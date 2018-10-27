@@ -12,6 +12,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Created by Oscar on 10/22/18.
+ */
 public class Results extends AppCompatActivity {
 
     private TextView scoreText;
@@ -20,6 +23,11 @@ public class Results extends AppCompatActivity {
     private Button homeBtn;
     DatabaseHelper stateCapitalsDb;
 
+    /*
+      This onCreate method is called everytime the app boots up. It contains most of the methods used in the program
+      @param savedInstanceState is used to save the state
+      @return there is nothing to return so it is void
+  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

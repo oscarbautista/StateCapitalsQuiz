@@ -11,11 +11,18 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Created by Daniel on 10/24/18.
+ */
 public class ScoreListActivity extends AppCompatActivity {
 
     DatabaseHelper stateCapitalsDB;
     List<ScoreCard> scoreCardList;
+    /*
+      This onCreate method is called everytime the app boots up. It contains most of the methods used in the program
+      @param savedInstanceState is used to save the state
+      @return there is nothing to return so it is void
+  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +42,10 @@ public class ScoreListActivity extends AppCompatActivity {
     class CustomAdapter extends BaseAdapter{
 
 
-
+        /*
+             This method gets the size of the score list
+             @return is an int of the size of the list
+             */
         @Override
         public int getCount() {
             return scoreCardList.size();

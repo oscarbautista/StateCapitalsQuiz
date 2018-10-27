@@ -10,14 +10,20 @@ public class QuizQuestion {
     private String capital;
     private String secondCity;
     private String thirdCity;
-
+    /*
+          This is the constructor for quiz questions
+          @param state is the state of the question
+          @param capital is the capital of the state which is the correct answer
+          @param secondCity is another city in the state
+          @param thirdCity is another city in the state
+      */
     public QuizQuestion(String state, String capital, String secondCity, String thirdCity) {
         this.state = state;
         this.capital = capital;
         this.secondCity = secondCity;
         this.thirdCity = thirdCity;
     }
-
+    //Below are the getters and setters for each variable for the object
     public String getState() {
         return state;
     }

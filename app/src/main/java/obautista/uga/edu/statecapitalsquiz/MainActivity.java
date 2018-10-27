@@ -12,7 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-
+/*
+    This is a splash page for my app.
+    @author Daniel Lim and Oscar Bautista
+    @version 1.0
+    @since 10-22-2018
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -20,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private Button historyBtn;
     DatabaseHelper stateCapitalsDb;
 
+    /*
+      This onCreate method is called everytime the app boots up. It contains most of the methods used in the program
+      @param savedInstanceState is used to save the state
+      @return there is nothing to return so it is void
+  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Reads in the states and their capitals from the csv file.
-     * Each state has a row created in the database.
-     */
+    /*
+      This onCreate method reads in the states and their capitals from the csv file.
+      Each state has a row created in the database.
+      @return there is nothing to return so it is void
+  */
     public void readCSV() {
         InputStream is = getResources().openRawResource(R.raw.state_capitals);
         BufferedReader reader = new BufferedReader (
