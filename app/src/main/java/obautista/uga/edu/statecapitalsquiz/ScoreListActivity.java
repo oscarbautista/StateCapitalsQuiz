@@ -64,10 +64,10 @@ public class ScoreListActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("0.##");
 
 
-            textView_date.setText(scoreCardList.get(i).getDate());
-            textView_scores.setText(df.format(scoreCardList.get(i).getScore()));
-            textView_questionsCorrect.setText(Integer.toString(scoreCardList.get(i).getQuestionsCorrect()));
-            textView_questionsWrong.setText(Integer.toString(scoreCardList.get(i).getQuestionsWrong()));
+            textView_date.setText("Date: " + scoreCardList.get(i).getDate());
+            textView_scores.setText("Score: " +df.format(scoreCardList.get(i).getScore())+"%");
+            textView_questionsCorrect.setText("Questions Correct: " +Integer.toString(scoreCardList.get(i).getQuestionsCorrect()));
+            textView_questionsWrong.setText("Questions Incorrect: " + Integer.toString(scoreCardList.get(i).getQuestionsWrong()));
 
             return view;
         }

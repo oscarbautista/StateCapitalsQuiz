@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -15,12 +16,14 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp"
+            android:layout_margin="10dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/scores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -29,6 +32,7 @@
             android:id="@+id/questionsCorrect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -37,6 +41,8 @@
             android:id="@+id/questionsWrong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="30dp"
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="bold" />
